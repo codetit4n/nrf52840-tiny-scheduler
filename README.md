@@ -1,6 +1,14 @@
 # nrf52840-tiny-scheduler
 
-A small bare-metal scheduler for the nRF52840 built to learn task scheduling, timing, and basic RTOS concepts.
+> [!WARNING]
+> Work in progress!
+
+A small bare-metal scheduler for the [nRF52840](https://www.nordicsemi.com/Products/nRF52840) built to learn task scheduling,
+timing, and basic RTOS concepts.
+
+## Current state
+
+Initial project structure and UARTE logging are in place.
 
 ## Notes
 
