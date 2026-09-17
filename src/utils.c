@@ -47,3 +47,36 @@ void log_br(void) {
 
 	uarte_write((const char*)line, 2);
 }
+
+void log_task(task_t t) {
+
+	uint8_t line[32];
+	size_t line_len = 0;
+
+	const char label[] = "TASK: ";
+	mem_cpy(&line[line_len], label, sizeof(label) - 1);
+	line_len += sizeof(label) - 1;
+	line_len += format_u32(t.tid, &line[line_len]);
+
+	if (t.tstate == NOT_READY) {
+		const char st[] = ", NOT READY";
+		mem_cpy(&line[line_len], st, sizeof(st) - 1);
+		line_len += sizeof(st) - 1;
+	} else if (t.tstate == READY) {
+		const char st[] = ", READY";
+		mem_cpy(&line[line_len], st, sizeof(st) - 1);
+		line_len += sizeof(st) - 1;
+	} else if (t.tstate == RUNNING) {
+		const char st[] = ", RUNNING";
+		mem_cpy(&line[line_len], st, sizeof(st) - 1);
+		line_len += sizeof(st) - 1;
+	} else if (t.tstate == SLEEPING) {
+		const char st[] = ", SLEEPING";
+		mem_cpy(&line[line_len], st, sizeof(st) - 1);
+		line_len += sizeof(st) - 1;
+	}
+	line[line_len++] = '\r';
+	line[line_len++] = '\n';
+
+	uarte_write((const char*)line, line_len);
+}

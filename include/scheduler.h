@@ -12,7 +12,7 @@ typedef enum {
 typedef void (*fn_ptr)(void);
 
 typedef struct {
-	uint32_t tid; // 1-MAX_SCHEDULED
+	uint32_t tid; // 0-MAX_SCHEDULED
 	fn_ptr fptr;
 	task_state tstate;
 } task_t;
@@ -21,3 +21,4 @@ void schedule_task(fn_ptr fn);
 task_t tasks(int idx);
 int task_ctr(void);
 void task_sleep(uint32_t tid);
+void start_scheduler(void);
