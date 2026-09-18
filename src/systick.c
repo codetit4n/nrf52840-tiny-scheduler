@@ -1,5 +1,7 @@
 #include "systick.h"
 
+static volatile uint32_t tick = 0;
+
 void init_systick() {
 	// Program reload value.
 	LOAD_RVR = 63999; // For the 64Mhz processor
@@ -12,4 +14,12 @@ void init_systick() {
 		   (1 << 1) | // TICKINT - enable SysTick exception request on count reaching 0
 		   (1 << 2) | // CLKSOURCE - processor clock
 		   (0 << 16); // COUNTFLAG
+}
+
+void SysTick_Handler(void) {
+	tick++;
+}
+
+uint32_t scheduler_tick(void) {
+	return tick;
 }

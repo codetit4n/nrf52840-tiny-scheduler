@@ -3,6 +3,7 @@
     .thumb
 
     .extern main
+    .extern SysTick_Handler
 
     /* Symbols provided by linker.ld */
     .extern _estack
@@ -36,7 +37,7 @@
     .word Default_Handler      /* DebugMonitor */
     .word 0
     .word Default_Handler      /* PendSV */
-    .word Default_Handler      /* SysTick */
+    .word SysTick_Handler      /* SysTick */
 
     /* nRF52840 has 48 external interrupt vectors */
     .rept 48

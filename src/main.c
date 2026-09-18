@@ -3,29 +3,39 @@
 #include "systick.h"
 #include "uarte.h"
 
-void fn1() {
-	char text[] = "Running function 1...\r\n";
-	uarte_write(text, sizeof(text));
+void fn1(void) {
+	char text[] = "RUN: fn1\r\n";
+	uarte_write(text, sizeof(text) - 1);
+
+	task_sleep(0, 1000);
 }
 
-void fn2() {
-	char text[] = "Running function 2...\r\n";
-	uarte_write(text, sizeof(text));
+void fn2(void) {
+	char text[] = "RUN: fn2\r\n";
+	uarte_write(text, sizeof(text) - 1);
+
+	task_sleep(1, 2000);
 }
 
-void fn3() {
-	char text[] = "Running function 3...\r\n";
-	uarte_write(text, sizeof(text));
+void fn3(void) {
+	char text[] = "RUN: fn3\r\n";
+	uarte_write(text, sizeof(text) - 1);
+
+	task_sleep(2, 3000);
 }
 
-void fn4() {
-	char text[] = "Running function 4...\r\n";
-	uarte_write(text, sizeof(text));
+void fn4(void) {
+	char text[] = "RUN: fn4\r\n";
+	uarte_write(text, sizeof(text) - 1);
+
+	task_sleep(3, 4000);
 }
 
-void fn5() {
-	char text[] = "Running function 5...\r\n";
-	uarte_write(text, sizeof(text));
+void fn5(void) {
+	char text[] = "RUN: fn5\r\n";
+	uarte_write(text, sizeof(text) - 1);
+
+	task_sleep(4, 5000);
 }
 
 int main(void) {
@@ -37,9 +47,6 @@ int main(void) {
 	schedule_task(fn3);
 	schedule_task(fn4);
 	schedule_task(fn5);
-
-	task_sleep(1);
-	task_sleep(3);
 
 	start_scheduler();
 

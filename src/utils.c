@@ -80,3 +80,18 @@ void log_task(task_t t) {
 
 	uarte_write((const char*)line, line_len);
 }
+
+void log_wake_tick(uint32_t t) {
+
+	uint8_t line[32];
+	size_t line_len = 0;
+
+	const char label[] = "WAKE TICK: ";
+	mem_cpy(&line[line_len], label, sizeof(label) - 1);
+	line_len += sizeof(label) - 1;
+	line_len += format_u32(t, &line[line_len]);
+	line[line_len++] = '\r';
+	line[line_len++] = '\n';
+
+	uarte_write((const char*)line, line_len);
+}

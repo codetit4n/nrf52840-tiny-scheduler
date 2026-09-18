@@ -6,15 +6,15 @@
 A small bare-metal cooperative scheduler for the [nRF52840](https://www.nordicsemi.com/Products/nRF52840), built to learn
 task scheduling, timing, task states, and basic RTOS concepts.
 
-The current design uses round-robin cooperative scheduling with a small static task table.
+The current design uses round-robin cooperative scheduling with a small static task table and a 1 ms SysTick timebase.
 
 ### Current state
 
-Basic cooperative scheduling is working, with SysTick integration in progress for timed task sleeping and wakeup.
+Basic cooperative scheduling, task sleeping, and timed wakeup are working.
 
 ### Implementation Checklist
 
-See the [PROGRESS.md](./PROGRESS.md) for the current project status and remaining work.
+See [PROGRESS.md](./PROGRESS.md) for the current project status and remaining work.
 
 ### Notes
 

@@ -6,3 +6,4 @@
 #define CALIB REG32(0xE000E01CUL)
 
 void init_systick(void);
+uint32_t scheduler_tick(void);
