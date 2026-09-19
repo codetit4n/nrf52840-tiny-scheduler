@@ -7,35 +7,35 @@ void fn1(void) {
 	char text[] = "RUN: fn1\r\n";
 	uarte_write(text, sizeof(text) - 1);
 
-	task_sleep(0, 1000);
+	task_sleep(1000); // sleep for 1 second
 }
 
 void fn2(void) {
 	char text[] = "RUN: fn2\r\n";
 	uarte_write(text, sizeof(text) - 1);
 
-	task_sleep(1, 2000);
+	task_sleep(2000); // sleep for 2 seconds
 }
 
 void fn3(void) {
 	char text[] = "RUN: fn3\r\n";
 	uarte_write(text, sizeof(text) - 1);
 
-	task_sleep(2, 3000);
+	task_sleep(3000); // sleep for 3 seconds
 }
 
 void fn4(void) {
 	char text[] = "RUN: fn4\r\n";
 	uarte_write(text, sizeof(text) - 1);
 
-	task_sleep(3, 4000);
+	task_sleep(4000); // sleep for 4 seconds
 }
 
 void fn5(void) {
 	char text[] = "RUN: fn5\r\n";
 	uarte_write(text, sizeof(text) - 1);
 
-	task_sleep(4, 5000);
+	task_sleep(5000); // sleep for 5 seconds
 }
 
 int main(void) {

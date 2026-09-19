@@ -5,6 +5,7 @@
 
 static task_t task_table[MAX_SCHEDULED];
 static int tctr = 0;
+static int running = -1;
 
 void schedule_task(fn_ptr fn) {
 	if (tctr >= MAX_SCHEDULED) {
@@ -45,8 +46,11 @@ void start_scheduler(void) {
 
 			if (t->tstate == READY) {
 				t->tstate = RUNNING;
+				running = t->tid;
 
 				t->fptr();
+
+				running = -1;
 
 				// if the fn (fptr) calls sleep while runnning it
 				// will be kept in SLEEPING state, otherwise it
@@ -59,15 +63,17 @@ void start_scheduler(void) {
 	}
 }
 
-void task_sleep(uint32_t tid, uint32_t wake_ms) {
-	if (tid >= (uint32_t)tctr) {
-		uarte_write("Invalid task ID\r\n", 17);
+void task_sleep(uint32_t wake_ms) {
+	if (running == -1) {
+		uarte_write("Cannot sleep when no task is running\r\n",
+			sizeof("Cannot sleep when no task is running\r\n") - 1);
 		return;
 	}
 	if (wake_ms > MAX_TASK_SLEEP_MS) {
-		uarte_write("Cannot sleep for more than 2147483647 ms (~24.855 days)\r\n", 66);
+		uarte_write("Cannot sleep for more than 2147483647 ms (~24.855 days)\r\n",
+			sizeof("Cannot sleep for more than 2147483647 ms (~24.855 days)\r\n") - 1);
 		return;
 	}
-	task_table[tid].wake_tick = scheduler_tick() + wake_ms; // 1 tick per ms
-	task_table[tid].tstate = SLEEPING;
+	task_table[running].wake_tick = scheduler_tick() + wake_ms; // 1 tick per ms
+	task_table[running].tstate = SLEEPING;
 }

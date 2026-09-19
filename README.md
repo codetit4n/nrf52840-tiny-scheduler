@@ -3,22 +3,21 @@
 > [!WARNING]
 > Work in progress!
 
-A small bare-metal cooperative scheduler for the [nRF52840](https://www.nordicsemi.com/Products/nRF52840), built to learn
-task scheduling, timing, task states, and basic RTOS concepts.
+A small bare-metal scheduler for the [nRF52840](https://www.nordicsemi.com/Products/nRF52840), built to learn
+task scheduling, timing, Cortex-M context switching, and basic RTOS internals.
 
-The current design uses round-robin cooperative scheduling with a small static task table and a 1 ms SysTick timebase.
+The project starts with a simple cooperative round-robin scheduler and will progress toward real task context switching
+and preemptive scheduling using SysTick and PendSV.
+
+The final goal is to run and stress-test small existing firmware workloads on top of the scheduler to check its behavior
+and limitations in more realistic use.
 
 ### Current state
 
-Basic cooperative scheduling, task sleeping, and timed wakeup are working.
+A basic cooperative round-robin scheduler with SysTick-based timed sleep/wakeup is working.
+
+The next phase is to add separate task contexts and cooperative context switching before moving to preemption.
 
 ### Implementation Checklist
 
 See [PROGRESS.md](./PROGRESS.md) for the current project status and remaining work.
-
-### Notes
-
-- Some low-level code is reused from my earlier [nRF52840 bare-metal project](https://github.com/codetit4n/nrf52840-baremetal).
-- The UARTE logging code is based on [this code](https://github.com/codetit4n/nrf52840-baremetal/blob/main/uarte-tx-only/src/main.c)
-  from that project. Read more about it [here](https://loke.sh/blog/nrf52840-web-server/1-nrf52840-baremetal/#uarte-transmit-only-minimal-logger).
-- This version is intentionally limited to cooperative scheduling. Preemptive scheduling and context switching may be explored separately later.

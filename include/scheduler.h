@@ -21,5 +21,5 @@ typedef struct {
 
 void schedule_task(fn_ptr fn);
 task_t tasks(int idx);
-void task_sleep(uint32_t tid, uint32_t wake_ms);
+void task_sleep(uint32_t wake_ms);
 void start_scheduler(void);
